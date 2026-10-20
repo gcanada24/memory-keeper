@@ -1,0 +1,16 @@
+{
+  "name": "claude-memory-marketplace",
+  "metadata": {
+    "description": "Portable, git-backed, cross-project memory for Claude Code."
+  },
+  "owner": {
+    "name": "Troy Thibodeau"
+  },
+  "plugins": [
+    {
+      "name": "memory-keeper",
+      "source": "./plugins/memory-keeper",
+      "description": "Portable, git-backed, cross-project memory for Claude Code."
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+{
+  "name": "memory-keeper",
+  "version": "0.2.0",
+  "description": "Portable, git-backed, cross-project memory for Claude Code: /memory-checkpoint, /memory-migrate, /memory-setup + the memory conventions. Engine only \u2014 a user's actual memories live in their own private ~/.claude-memory store, never in this plugin.",
+  "author": { "name": "Troy Thibodeau" }
+}
