@@ -10,7 +10,7 @@ Steps:
 2. For each thread, update its **per-work-thread worklog** memory file (create if new) with a dated entry: **what was done → result → current state**, plus decisions and OPEN questions. Rules: falsifiable; **never "solved!"**; collapse resolved back-and-forth to its conclusion; remove superseded claims; keep open items. Capture only the important curated bits — the Claude Code `.jsonl` transcript is the lossless backstop.
 3. Add or refresh the one-line pointer in that repo's `MEMORY.md` index.
 4. Link related memories with `[[name]]`.
-5. Commit the store (do NOT push — the user pushes). **Scope the commit to this project's own memory subtree** — never `add -A`:
+5. Commit the store (pushing is step 6). **Scope the commit to this project's own memory subtree** — never `add -A`:
    ```
    PROJ=<project folder under ~/.claude-memory/projects, e.g. capture>
    git -C ~/.claude-memory add -- "projects/$PROJ/memory"
@@ -30,5 +30,16 @@ Steps:
    already safely on disk, so a retry is all that is needed. Low likelihood (~1 in 2400 per
    checkpoint at a few-minute cadence) but silent if unhandled — an unretried failure leaves
    the memory unversioned until the next checkpoint sweeps it up.
+6. **Sync to the remote, if the store has one** (`git -C ~/.claude-memory remote get-url origin`;
+   if none, skip — the store is local-only). The remote must be **private**; if you have reason to
+   believe it is public, stop and tell the user instead of pushing.
+   ```
+   git -C ~/.claude-memory pull --rebase --autostash
+   git -C ~/.claude-memory push
+   ```
+   Pull first so checkpoints made on another device are merged in. If the rebase hits a conflict,
+   stop, show the user the conflicting files, and resolve together — never force-push. A push
+   failure (offline, auth) is not fatal: the commit is safe locally and the next checkpoint will
+   push it; just tell the user.
 
 Optional focus / note from the user: $ARGUMENTS
